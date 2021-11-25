@@ -74,7 +74,7 @@ function About(props) {
 }
 
 function RenderPartner({partner}){
-    if({partner}){
+    if(partner){
         return(
             <>
                 <Media object src={partner.image} alt={partner.name} width="150" />
