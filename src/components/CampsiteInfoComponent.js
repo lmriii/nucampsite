@@ -1,6 +1,80 @@
 import React from "react";
-import { Card, CardBody, CardText, CardImg, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Card, CardBody, CardText, CardImg, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Control, LocalForm, Errors } from 'react-redux-form';
+
+class CommentForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isModalOpen: false,
+            author: '',
+            touched: {
+                author: false
+            }
+        };
+        this.toggleModal = this.toggleModal.bind(this);
+        // this.handleComment = this.handleComment.bind(this);
+    }
+
+        toggleModal() {
+            this.setState({
+                isModalOpen: !this.state.isModalOpen
+            });
+        }
+
+        // handleComment(values) {
+        //     console.log("Comments Modal Submitted: " + JSON.stringify(values));
+        //     alert("Comments Modal Submitted: " + JSON.stringify(values));
+        // }
+
+        render() {
+            return (
+                <>
+                    <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                        <ModalHeader>Submit Comment</ModalHeader>
+                        <ModalBody toggle={this.toggleModal}>
+                            <LocalForm onSubmit={this.handleComment}>
+                                <div className="form-group">
+                                    <Label htmlFor="rating">Rating</Label>
+                                    <Control.select 
+                                    model='.rating' 
+                                    id='rating' 
+                                    name='rating' 
+                                    className='form-control'>
+                                        <option name='rating' value='1'>1</option>
+                                        <option name='rating' value='2'>2</option>
+                                        <option name='rating' value='3'>3</option>
+                                        <option name='rating' value='4'>4</option>
+                                        <option name='rating' value='5'>5</option>
+                                    </Control.select>
+                                </div>
+                                <div className="form-group">
+                                    <Label htmlFor="author">Your Name</Label>
+                                    <Control.text 
+                                    model=".author" 
+                                    id="author" 
+                                    name="author"
+                                    className="form-control" />
+                                </div>
+                                <div className="form-group">
+                                    <Label htmlFor="text">Comment</Label>
+                                    <Control.textarea 
+                                    model=".comment" 
+                                    id="comment" 
+                                    name="comment" 
+                                    className="form-control"
+                                    rows='6' />
+                                </div>
+                                <Button type='submit' value='submit' color='primary' onClick={this.handleComment} toggle={this.toggleModal}>Submit</Button>
+                            </LocalForm>
+                        </ModalBody>
+                    </Modal>
+                    <Button outline onClick={this.toggleModal}><i className="fa fa-pencil fa-lg" />Submit Comment</Button>
+                </>
+            );
+        }
+    }
 
 
 function RenderCampsite({ campsite }) {
@@ -30,6 +104,7 @@ function RenderComments({ comments }) {
                         </div>
                     );
                 })}
+                <CommentForm />
             </div>
         );
     } return <div />
