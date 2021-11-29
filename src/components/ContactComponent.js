@@ -157,7 +157,7 @@ class Contact extends Component {
                                             required,
                                             validEmail
                                         }}
-                                    />
+                                    /> 
                                     <Errors
                                         className='text-danger'
                                         model='.email'
