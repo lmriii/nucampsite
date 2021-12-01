@@ -16,8 +16,8 @@ export const ConfigureStore = () => {
             comments: Comments,
             partners: Partners,
             promotions: Promotions
-        })
-        
+        }),
+        applyMiddleware(thunk, logger)
     );
 
     return store;
