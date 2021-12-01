@@ -8,12 +8,9 @@ const maxLength = len => val => !val || (val.length <= len);
 const minLength = len => val => val && (val.length >= len);
 class CommentForm extends React.Component {
     constructor(props) {
-        super(props);
+        super(props); 
         this.state = {
-            isModalOpen: false,
-            touched: {
-                author: false
-            }
+            isModalOpen: false
         };
         this.toggleModal = this.toggleModal.bind(this);
         this.handleComment = this.handleComment.bind(this);
@@ -26,8 +23,9 @@ class CommentForm extends React.Component {
     }
 
     handleComment(values) {
-        console.log("Comments Modal Submitted: " + JSON.stringify(values));
-        alert("Comments Modal Submitted: " + JSON.stringify(values));
+        this.props.addComment(this.props.campsiteId, values.rating, values.author, values.text);
+        this.toggleModal();
+        console.log('Current State is: ' + JSON.stringify(values));
     }
 
     render() {
@@ -44,11 +42,11 @@ class CommentForm extends React.Component {
                                     id='rating'
                                     name='rating'
                                     className='form-control'>
-                                    <option name='rating' >1</option>
-                                    <option name='rating' >2</option>
-                                    <option name='rating' >3</option>
-                                    <option name='rating' >4</option>
-                                    <option name='rating' >5</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
                                 </Control.select>
                             </div>
                             <div className="form-group">
@@ -77,17 +75,15 @@ class CommentForm extends React.Component {
                             <div className="form-group">
                                 <Label htmlFor="text">Comment</Label>
                                 <Control.textarea
-                                    model=".comment"
-                                    id="comment"
-                                    name="comment"
+                                    model=".text"
+                                    id="text"
+                                    name="text"
                                     className="form-control"
                                     rows='6' />
                             </div>
                             <Button
                                 type='submit'
-                                value='submit'
                                 color='primary'
-                                onClick={this.toggleModal}
                             >Submit</Button>
                         </LocalForm>
                     </ModalBody>
@@ -112,7 +108,7 @@ function RenderCampsite({ campsite }) {
     );
 }
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, addComment, campsiteId }) {
     if (comments) {
         return (
             <div className="col-md-5 m-1">
@@ -126,7 +122,7 @@ function RenderComments({ comments }) {
                         </div>
                     );
                 })}
-                <CommentForm />
+                <CommentForm campsiteId={campsiteId} addComment={addComment} />
             </div>
         );
     } return <div />
@@ -148,7 +144,10 @@ function CampsiteInfo(props) {
                 </div>
                 <div className="row">
                     <RenderCampsite campsite={props.campsite} />
-                    <RenderComments comments={props.comments} />
+                    <RenderComments comments={props.comments}
+                    addComment={props.addComment}
+                    campsiteId={props.campsite.id}
+                    />
                 </div>
             </div>
         );
