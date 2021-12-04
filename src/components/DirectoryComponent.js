@@ -3,6 +3,7 @@ import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } 
 import { Link } from 'react-router-dom';
 import {Loading} from './LoadingComponent';
 import {baseUrl} from '../shared/baseUrl';
+import { Transform } from 'react-animation-components';
 
 
 function RenderDirectoryItem({ campsite }) {
@@ -59,7 +60,9 @@ function Directory(props) {
                         <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
                         <BreadcrumbItem active>Directory</BreadcrumbItem>
                     </Breadcrumb>
-                    <h2>Directory</h2>
+                    <Transform in enterTransform="translateX(-80%)">
+                    <h2 style={{marginLeft:'80%'}}>Directory</h2>
+                    </Transform>
                     <hr />
                 </div>
             </div>

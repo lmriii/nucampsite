@@ -40,7 +40,7 @@ class CommentForm extends React.Component {
                     <ModalBody>
                         <LocalForm onSubmit={values => this.handleComment(values)}>
                             <div className="form-group">
-                                <Label htmlFor="rating">Rating</Label>
+                                <Label htmlFor="rating">Rating</Label> {/*eslint-disable-next-line*/}
                                 <Control.select
                                     model='.rating'
                                     id='rating'
@@ -54,7 +54,7 @@ class CommentForm extends React.Component {
                                 </Control.select>
                             </div>
                             <div className="form-group">
-                                <Label htmlFor="author">Your Name</Label>
+                                <Label htmlFor="author">Your Name</Label> {/*eslint-disable-next-line*/}
                                 <Control.text
                                     model=".author"
                                     id="author"
@@ -77,7 +77,7 @@ class CommentForm extends React.Component {
                                 />
                             </div>
                             <div className="form-group">
-                                <Label htmlFor="text">Comment</Label>
+                                <Label htmlFor="text">Comment</Label> {/*eslint-disable-next-line*/}
                                 <Control.textarea
                                     model=".text"
                                     id="text"
